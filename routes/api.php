@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::apiResource('todo', TodoController::class);
+
+Route::middleware(['api-login', 'throttle'])->group(function () {
+	Route::post('login', [AuthController::class, 'login']);
+	Route::post('register', [AuthController::class, 'register']);
+});

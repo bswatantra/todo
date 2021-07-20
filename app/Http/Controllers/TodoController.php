@@ -14,19 +14,10 @@ class TodoController extends Controller
 	 */
 	public function index()
 	{
-		$todos = Todo::latest()->paginate(1);
+		$todos = Todo::latest()->get();
 		return response()->json($todos);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
-		//
-	}
 
 	/**
 	 * Store a newly created resource in storage.
@@ -52,16 +43,6 @@ class TodoController extends Controller
 		//
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\Models\Todo  $todo
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit(Todo $todo)
-	{
-		//
-	}
 
 	/**
 	 * Update the specified resource in storage.
@@ -83,8 +64,9 @@ class TodoController extends Controller
 	 * @param  \App\Models\Todo  $todo
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Todo $todo)
+	public function destroy($todo)
 	{
+		// dd($todo);
 		Todo::destroy($todo);
 		return response()->json("ok");
 	}
